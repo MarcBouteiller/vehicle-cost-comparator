@@ -2,19 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { ChartsModule } from 'ng2-charts/ng2-charts'
+import { Ng2BootstrapModule, CollapseModule } from 'ng2-bootstrap';
 import { AppComponent } from './app.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { UserInfosComponent } from './user-infos/user-infos.component';
+import { CostCalculatorService } from './services/cost-calculator.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VehicleComponent,
+    UserInfosComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ChartsModule,
+    Ng2BootstrapModule.forRoot(),
+    CollapseModule.forRoot()
   ],
-  providers: [],
+  providers: [CostCalculatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

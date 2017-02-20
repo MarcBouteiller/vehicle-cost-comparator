@@ -1,3 +1,49 @@
-<h1>
-  {{title}}
-</h1>
+<div class="layout row">
+
+    <app-user-infos class="user-infos col-2" [userInfos]="userInfos"></app-user-infos>
+
+    <div class="vehicle-charts col-10">
+        <div class="vehicles">
+            
+            <app-vehicle 
+                *ngFor="let v of vehicles" 
+                [vehicle]="v"
+                [collapsed]="isCollapsed"
+                [costPerMonth]="costsPerMonth[index]"
+                (vehicleDeleted)="removeVehicle($event)">
+            </app-vehicle>
+            
+            <div class="add-vehicle" *ngIf="vehicles.length < 5">        
+                <div class="form-group">
+                    <small>Ajouter un vehicule</small>
+                    <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
+                </div>
+                <button 
+                    [disabled]="!vehicleName"
+                    class="btn btn-primary btn-lg" 
+                    (click)="addVehicle()">
+                    +
+                </button>   
+            </div>
+        </div>
+
+        <div class="generate-btn">
+            <button (click)="generateCharts()" class="btn btn-success " [disabled]="!vehicles.length">Calculer</button>
+            <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Editer</button>
+        </div>
+    
+        <div class="chart" *ngIf="chartData.length">
+            <canvas baseChart
+                [datasets]="chartData"
+                [labels]="chartLabels"
+                [legend]="chartLegend"
+                [options]="chartOptions"
+                [chartType]="chartType">
+            </canvas>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+</footer>

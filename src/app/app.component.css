@@ -1,0 +1,55 @@
+header{
+    text-align: center;
+    justify-content: center;
+    height: 35px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.layout{
+    min-height: 100vh;
+}
+
+.vehicle-charts{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.generate-btn{
+    align-self: center;    
+    padding: 10px 100px;
+}
+
+app-user-infos{
+    padding: 20px 0px 0px 20px;
+}
+
+.add-vehicle {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart{
+    border: solid 1px #aaa;
+    padding: 50px;
+    background-color: #fff;    
+}
+
+.vehicles {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+app-vehicle{
+    /*margin-right: 3%;*/
+    align-items: stretch;
+    border: solid 1px #aaa;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #fff;
+    min-width: 185px;
+}

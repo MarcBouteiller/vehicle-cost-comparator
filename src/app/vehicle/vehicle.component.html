@@ -1,0 +1,43 @@
+<div class="vehicle">
+  
+  <span class="title bg-info text-white">{{ vehicle.name }}</span>
+
+  <div *ngIf="collapsed">{{ vehicle.costPerMonth | number:'1.2-2' }}€/mois</div>
+
+  <div [collapse]="collapsed">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">€</span>
+      <input class="form-control" placeholder="Prix d'achat" [(ngModel)]="vehicle.price" type="number">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">€</span>
+      <input class="form-control" placeholder="Location" [(ngModel)]="vehicle.renting" type="number">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">E</span>
+      <select placeholder="Energie" class="form-control" [(ngModel)]="vehicle.energy">
+        <option *ngFor="let e of energies" [value]="e">{{energiesEnum[e]}}</option>
+      </select>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1" *ngIf="vehicle.energy != 0">L</span>
+      <span class="input-group-addon" id="basic-addon1" *ngIf="vehicle.energy == 0">kWh</span>
+      <input class="form-control" placeholder="Consommation /100km" [(ngModel)]="vehicle.consumption" type="number">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">€</span>
+      <input class="form-control" placeholder="Frais d'entretien" [(ngModel)]="vehicle.maintenanceCost" type="number">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">€</span>
+      <input class="form-control" placeholder="Frais d'assurance" [(ngModel)]="vehicle.feesInsurance" type="number">
+    </div>
+    <br>
+    <button (click)="delete()" class="btn btn-danger">Supprimer</button>
+  </div>
+</div>
