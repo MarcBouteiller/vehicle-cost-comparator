@@ -13,7 +13,7 @@
                 (vehicleDeleted)="removeVehicle($event)">
             </app-vehicle>
             
-            <div class="add-vehicle" *ngIf="vehicles.length < 5">        
+            <div class="add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
                 <div class="form-group">
                     <small>Ajouter un vehicule</small>
                     <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
@@ -28,8 +28,8 @@
         </div>
 
         <div class="generate-btn">
-            <button (click)="generateCharts()" class="btn btn-success " [disabled]="!vehicles.length">Calculer</button>
-            <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Editer</button>
+            <button (click)="generateChart()" class="btn btn-success " [disabled]="!vehicles.length">Calculer</button>
+            <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Ajustez vos données</button>
         </div>
     
         <div class="chart" *ngIf="chartData.length">

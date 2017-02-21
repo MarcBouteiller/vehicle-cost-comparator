@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { UserInfosComponent } from './user-infos/user-infos.component';
 import { CostCalculatorService } from './services/cost-calculator.service';
+import { LocalStorageService } from './services/localstorage.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { CostCalculatorService } from './services/cost-calculator.service';
     Ng2BootstrapModule.forRoot(),
     CollapseModule.forRoot()
   ],
-  providers: [CostCalculatorService],
+  providers: [CostCalculatorService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
