@@ -1,4 +1,4 @@
-<div class="vehicle">
+<div class="d-flex flex-column">
   
   <span class="title bg-info text-white">{{ vehicle.name }}</span>
 
@@ -7,7 +7,7 @@
   <div [collapse]="collapsed">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
-      <input class="form-control" placeholder="Prix d'achat" [(ngModel)]="vehicle.price" type="number">
+      <input class="form-control" placeholder="Prix d'achat" [(ngModel)]="vehicle.price" (ngModelChange)="modelChanged($event)" type="number">
     </div>
     <br>
     <div class="input-group">

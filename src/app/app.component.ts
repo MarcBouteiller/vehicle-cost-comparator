@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Operator } from 'rxjs/';
 
 import { UserInfosComponent } from './user-infos/user-infos.component';
@@ -15,8 +15,7 @@ import { LocalStorageService } from './services/localstorage.service';
 })
 export class AppComponent {
 
-  userInfos: UserInfos = new UserInfos();
-  
+  userInfos: UserInfos = new UserInfos();  
   vehicleName: string;
   vehicles: Array<Vehicle>;
   chartType:string = 'line';
@@ -59,6 +58,13 @@ export class AppComponent {
     this.saveVehicles();
   }
 
+  /**
+   * Instructions when vehicle change.
+   */
+  onVehicleChange(vehicle: Vehicle){
+    this.saveVehicles();
+  }
+
 
   /**
    * Generate data for chart
@@ -92,7 +98,7 @@ export class AppComponent {
   }
 
   /**
-   * 
+   * Save vehicles in localstorage.
    */
   private saveVehicles(){
     this.storage.put(this.vehicles);

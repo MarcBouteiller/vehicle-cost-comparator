@@ -1,6 +1,13 @@
 <div class="layout row">
 
-    <app-user-infos class="user-infos col-2" [userInfos]="userInfos"></app-user-infos>
+    <div class="d-flex flex-column col-2">
+        <app-user-infos class="user-infos" [userInfos]="userInfos"></app-user-infos>
+        <div class="generate-btn">
+            <button (click)="generateChart()" class="btn btn-success " [disabled]="!vehicles.length">Comparer</button>
+            <br>
+            <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Ajustez vos données</button>
+        </div>
+    </div>
 
     <div class="vehicle-charts col-10">
         <div class="vehicles">
@@ -10,7 +17,8 @@
                 [vehicle]="v"
                 [collapsed]="isCollapsed"
                 [costPerMonth]="costsPerMonth[index]"
-                (vehicleDeleted)="removeVehicle($event)">
+                (vehicleDeleted)="removeVehicle($event)"
+                (onChange)="onVehicleChange($event)">
             </app-vehicle>
             
             <div class="add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
@@ -27,10 +35,7 @@
             </div>
         </div>
 
-        <div class="generate-btn">
-            <button (click)="generateChart()" class="btn btn-success " [disabled]="!vehicles.length">Calculer</button>
-            <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Ajustez vos données</button>
-        </div>
+     
     
         <div class="chart" *ngIf="chartData.length">
             <canvas baseChart

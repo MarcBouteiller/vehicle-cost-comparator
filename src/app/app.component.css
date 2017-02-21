@@ -19,8 +19,9 @@ header{
 }
 
 .generate-btn{
-    align-self: center;    
-    padding: 10px 100px;
+    padding: 20px 0px 0px 20px;
+    flex-direction: column;
+    display: flex;
 }
 
 app-user-infos{
@@ -40,7 +41,7 @@ app-user-infos{
 
 .vehicles {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 30px;
 }
 
