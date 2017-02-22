@@ -6,6 +6,7 @@ import { Vehicle } from "./vehicle/shared/vehicle.model";
 import { UserInfos } from "./user-infos/shared/user-infos.model";
 import { CostCalculatorService } from './services/cost-calculator.service';
 import { LocalStorageService } from './services/localstorage.service';
+import { ChartModel } from './chart.model';
 
 
 @Component({
@@ -18,17 +19,15 @@ export class AppComponent {
   userInfos: UserInfos = new UserInfos();  
   vehicleName: string;
   vehicles: Array<Vehicle>;
-  chartType:string = 'line';
-  chartData:any[] = [];
-  chartLegend: boolean = true;
-  chartLabels: Array<string> = [];
-  chartOptions:any = { 
-    responsive: true
-  };
+
+  lineChart: ChartModel;
+  barChart: ChartModel;
   isCollapsed= false;
   costsPerMonth: Array<number> = [];
 
   constructor(private calc : CostCalculatorService, private storage: LocalStorageService){
+    this.barChart = new ChartModel('bar', true, true);
+    this.lineChart = new ChartModel('line', true, true);
     let storedData = this.storage.restore();
     this.vehicles = [];
     if(storedData !== null){
@@ -69,25 +68,33 @@ export class AppComponent {
   /**
    * Generate data for chart
    */
-  generateChart(){    
-    this.saveVehicles();
+  generateCharts(){    
     this.isCollapsed = true;
+    this.costsPerMonth.splice(0);
 
-    // generate labels
-    this.chartLabels = [];
+    // generate labels for lineChart
+    let lineChartLabels = [];
     for(let i = 0; i <= this.userInfos.nbYears; i++){
-      this.chartLabels.push(i.toString());
+      lineChartLabels.push(i.toString());
     }
+    this.lineChart.labels = lineChartLabels;
 
     // generate data
-    this.chartData = [];
-    this.costsPerMonth.splice(0);
+    let lineData = [];
+    let barLabels = [];
+    let barData = [];
     this.vehicles.forEach(v => {
+      barLabels.push(v.name);
+
       let costs = this.calc.calculateCostPerYear(v, this.userInfos);
-      this.chartData.push({label: v.name, data: costs, fill: false});
       let costPerMonth = this.calc.calculateCostPerMonth(costs[costs.length-1], this.userInfos);
-      v.costPerMonth = costPerMonth;
-    }); 
+      
+      barData.push(costPerMonth);
+      lineData.push({label: v.name, data: costs, fill: false});
+    });
+    this.lineChart.data = lineData; 
+    this.barChart.data = [{ data : barData, label: "Coût global par mois"}];
+    this.barChart.labels = barLabels;
   }
   
   /**

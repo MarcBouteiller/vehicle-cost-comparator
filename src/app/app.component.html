@@ -3,7 +3,7 @@
     <div class="d-flex flex-column col-2">
         <app-user-infos class="user-infos" [userInfos]="userInfos"></app-user-infos>
         <div class="generate-btn">
-            <button (click)="generateChart()" class="btn btn-success " [disabled]="!vehicles.length">Comparer</button>
+            <button (click)="generateCharts()" class="btn btn-success " [disabled]="!vehicles || !vehicles.length">Comparer</button>
             <br>
             <button (click)="uncollapseVehicles()" class="btn btn-secondary" *ngIf="isCollapsed">Ajustez vos données</button>
         </div>
@@ -34,19 +34,27 @@
                 </button>   
             </div>
         </div>
-
-     
-    
-        <div class="chart" *ngIf="chartData.length">
-            <canvas baseChart
-                [datasets]="chartData"
-                [labels]="chartLabels"
-                [legend]="chartLegend"
-                [options]="chartOptions"
-                [chartType]="chartType">
-            </canvas>
+        
+        <div class="d-flex" *ngIf="lineChart.data && barChart.data">
+            <div class="chart">
+                <canvas baseChart
+                    [datasets]="lineChart.data"
+                    [labels]="lineChart.labels"
+                    [legend]="lineChart.legend"
+                    [options]="lineChart.options"
+                    [chartType]="lineChart.type">
+                </canvas>
+            </div>
+            <div class="chart">            
+                <canvas baseChart
+                    [datasets]="barChart.data"
+                    [labels]="barChart.labels"
+                    [options]="barChart.options"
+                    [legend]="barChart.legend"
+                    [chartType]="barChart.type">
+                </canvas>
+            </div>
         </div>
-    </div>
 
 </div>
 

@@ -12,8 +12,6 @@ export class Vehicle{
     consumption: number;
     renting: number;
 
-    costPerMonth: number;
-
     constructor(name: string){
         this.name = name;        
         this.energy = Energy.Electrique;

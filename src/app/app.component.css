@@ -36,17 +36,20 @@ app-user-infos{
 .chart{
     border: solid 1px #aaa;
     padding: 50px;
-    background-color: #fff;    
+    background-color: #fff;
+    display: block;
+    flex: 1;
+    margin:1%;
 }
 
 .vehicles {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
 }
 
 app-vehicle{
-    /*margin-right: 3%;*/
+    margin-right: 3%;
     align-items: stretch;
     border: solid 1px #aaa;
     border-radius: 3px;

@@ -8,7 +8,7 @@ export class UserInfos {
     nbYears: number;
 
     constructor(){
-        this.nbYears = 10;
+        this.nbYears = 5;
         this.km = 15000;
         this.electricity = 0.15;
         this.sp95 = 1.35;

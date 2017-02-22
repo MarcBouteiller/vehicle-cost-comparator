@@ -2,8 +2,6 @@
   
   <span class="title bg-info text-white">{{ vehicle.name }}</span>
 
-  <strong class="text-center" *ngIf="collapsed">{{ vehicle.costPerMonth | number:'1.2-2' }}€/mois</strong>  
-
   <div [collapse]="collapsed">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
