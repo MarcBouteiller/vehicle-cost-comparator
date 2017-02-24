@@ -1,7 +1,7 @@
 export class ChartModel {
 
     type: string;
-    data: any;
+    data: any[];
     legend: boolean;
     labels: Array<string>;
     options: any;
