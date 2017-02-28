@@ -62,6 +62,9 @@ export class AppComponent {
    */
   onVehicleChange(vehicle: Vehicle){
     this.saveVehicles();
+    if(this.lineChart.data){
+      this.generateCharts();
+    }
   }
 
 
@@ -82,18 +85,18 @@ export class AppComponent {
     // generate data
     let lineData = [];
     let barLabels = [];
-    let barData = [];
+    let barChartData = [];
     this.vehicles.forEach(v => {
       barLabels.push(v.name);
-
-      let costs = this.calc.calculateCostPerYear(v, this.userInfos);
-      let costPerMonth = this.calc.calculateCostPerMonth(costs[costs.length-1], this.userInfos);
+      let costs = this.calc.calculateCostsPerYear(v, this.userInfos);
+      let costPerYear = this.calc.calculateCostPerYear(v, this.userInfos);
       
-      barData.push(costPerMonth);
+      barChartData.push(costPerYear);
       lineData.push({label: v.name, data: costs, fill: false});
     });
+
     this.lineChart.data = lineData; 
-    this.barChart.data = [{ data : barData, label: "Coût global par mois"}];
+    this.barChart.data = [{ data : barChartData, label: "Coût par an"}];
     this.barChart.labels = barLabels;
   }
   

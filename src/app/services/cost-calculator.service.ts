@@ -15,27 +15,38 @@ export class CostCalculatorService {
     return globalCost / userInfos.nbYears / 12;
   }
 
+    /**
+   * Calculate cost per month for the period.
+   */
+  calculateCostPerYear(v: Vehicle, userInfos: UserInfos): number {
+      let cost = 0;
+      let energyCost = userInfos.km / 100 * v.consumption * this.getEnergysPrice(v.energy, userInfos);
+      let renting = 0;
+      if (v.renting) {
+        renting = v.renting * 12;
+      }
+
+      cost += v.maintenanceCost;
+      cost += v.feesInsurance;
+      cost += energyCost;
+      cost += renting;
+      return cost;
+  }
+
   /**
    * Calculate the global cost for each year.
    */
-  calculateCostPerYear(v: Vehicle, userInfos: UserInfos): Array<number> {
+  calculateCostsPerYear(v: Vehicle, userInfos: UserInfos): Array<number> {
     let costs: Array<number> = [];
     let cost = 0;
     if (v.price) {
       cost = v.price;
       costs.push(cost);
     }
-    let energyCost = userInfos.km / 100 * v.consumption * this.getEnergysPrice(v.energy, userInfos);
-    let renting = 0;
-    if (v.renting) {
-      renting = v.renting * 12;
-    }
+    let costPerYear = this.calculateCostPerYear(v, userInfos);    
     for (let i = 0; i < userInfos.nbYears; i++) {
       // per year costs
-      cost += v.maintenanceCost;
-      cost += v.feesInsurance;
-      cost += energyCost;
-      cost += renting;
+      cost += costPerYear;
       costs.push(cost);
     }
     return costs;

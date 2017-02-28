@@ -47,13 +47,3 @@ app-user-infos{
     justify-content: center;
     margin-bottom: 30px;
 }
-
-app-vehicle{
-    margin-right: 3%;
-    align-items: stretch;
-    border: solid 1px #aaa;
-    border-radius: 3px;
-    padding: 10px;
-    background-color: #fff;
-    min-width: 185px;
-}

@@ -9,7 +9,17 @@ export class ChartModel {
     constructor(type: string, legend: boolean, responsive: boolean) {
         this.type = type;
         this.legend = legend;
-        this.options = { responsive: responsive};
+        this.options = { 
+            responsive: responsive,
+            scales: {                
+                yAxes: [{
+                    stacked: false,
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0
+                    }
+                }]
+            }
+        };
     }
-
 }
