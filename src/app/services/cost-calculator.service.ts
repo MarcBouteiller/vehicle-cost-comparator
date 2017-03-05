@@ -8,6 +8,10 @@ export class CostCalculatorService {
 
   constructor() { }
 
+  calculateConsumption (v: Vehicle, userInfos: UserInfos){
+    return userInfos.km / 100 * v.consumption * this.getEnergysPrice(v.energy, userInfos);
+  }
+
   /**
    * Calculate cost per month for the period.
    */
@@ -20,15 +24,22 @@ export class CostCalculatorService {
    */
   calculateCostPerYear(v: Vehicle, userInfos: UserInfos): number {
       let cost = 0;
-      let energyCost = userInfos.km / 100 * v.consumption * this.getEnergysPrice(v.energy, userInfos);
+      let energyCost = this.calculateConsumption(v, userInfos);
+      
       let renting = 0;
       if (v.renting) {
         renting = v.renting * 12;
       }
 
-      cost += v.maintenanceCost;
-      cost += v.feesInsurance;
-      cost += energyCost;
+      if(v.maintenanceCost){
+        cost += v.maintenanceCost;
+      }
+      if(v.feesInsurance){
+        cost += v.feesInsurance;
+      }
+      if(energyCost){
+        cost += energyCost;
+      }
       cost += renting;
       return cost;
   }

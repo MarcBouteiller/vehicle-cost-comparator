@@ -14,12 +14,11 @@
         <!-- Actions (Add vehicle, compare) -->
         <div class="d-flex justify-content-around align-items-center add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
             <div class="form-group">
-                <small>Ajouter un vehicule</small>
                 <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
             </div>
             <button 
                 [disabled]="!vehicleName"
-                class="btn btn-default btn-primary add-button" 
+                class="btn btn-default btn-primary" 
                 (click)="addVehicle()">
                 +
             </button>
@@ -51,7 +50,7 @@
 
     <!-- Charts -->
     <div class="charts">
-        <div class="chart" *ngIf="lineChart.data && barChart.data">
+        <div class="chart" *ngIf="lineChart.data">
             <canvas 
                 baseChart
                 [datasets]="lineChart.data"
@@ -61,7 +60,7 @@
                 [chartType]="lineChart.type">
             </canvas>
         </div>
-        <div class="chart" *ngIf="lineChart.data && barChart.data">
+        <div class="chart" *ngIf="barChart.data">
             <canvas 
                 baseChart
                 [datasets]="barChart.data"
@@ -71,5 +70,15 @@
                 [chartType]="barChart.type">
             </canvas>
         </div>
+        <!--<div class="chart" *ngIf="radarChart.data">
+            <canvas 
+                baseChart
+                [datasets]="radarChart.data"
+                [labels]="radarChart.labels"
+                [options]="radarChart.options"
+                [legend]="radarChart.legend"
+                [chartType]="radarChart.type">
+            </canvas>
+        </div>-->
     </div>
 </div>

@@ -17,8 +17,8 @@ header{
     flex-direction: column;
 }
 
-.add-button {
-    margin:  0px;
+.add-vehicle{
+    padding: 15px;
 }
 
 .charts {
@@ -68,6 +68,8 @@ header{
 }
 
 .card-header > a {
-    color: #000;
+    color: #444;
     font-size: 130%;
+    text-decoration: none;
+    font-weight: bold;
 }

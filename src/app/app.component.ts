@@ -22,6 +22,7 @@ export class AppComponent {
 
   lineChart: ChartModel;
   barChart: ChartModel;
+  radarChart: ChartModel;
   isCollapsed= false;
   costsPerMonth: Array<number> = [];
 
@@ -63,9 +64,7 @@ export class AppComponent {
    */
   onVehicleChange(vehicle: Vehicle){
     this.saveVehicles();
-    if(this.lineChart.data){
-      this.generateCharts();
-    }
+    this.generateCharts();
   }
 
 
@@ -88,16 +87,24 @@ export class AppComponent {
     let barLabels = ['Coût par an'];
     let barChartData = [];
     this.vehicles.forEach(v => {
-      let costs = this.calc.calculateCostsPerYear(v, this.userInfos);
-      let costPerYear = {data: [this.calc.calculateCostPerYear(v, this.userInfos)], label: v.name};
-      
-      barChartData.push(costPerYear);
-      lineData.push({label: v.name, data: costs, fill: false});
+      this.generateBarChartCostPerYear(barChartData, v);
+      this.generateLineChart(lineData, v);
     });
     
     this.lineChart.data = lineData; 
     this.barChart.data = barChartData;
     this.barChart.labels = barLabels;
+
+  }
+
+  generateLineChart(lineData:any[], v:Vehicle){
+    let costs = this.calc.calculateCostsPerYear(v, this.userInfos);
+    lineData.push({label: v.name, data: costs, fill: false});
+  }
+
+  generateBarChartCostPerYear(barChartData: any[], v: Vehicle){
+    let costPerYear = {data: [this.calc.calculateCostPerYear(v, this.userInfos)], label: v.name};
+    barChartData.push(costPerYear);
   }
 
   /**
