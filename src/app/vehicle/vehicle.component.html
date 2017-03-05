@@ -1,37 +1,41 @@
 <div class="d-flex flex-column">
-  <br>
   <div>
+    <small>Prix d'achat</small>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
       <input class="form-control" placeholder="Prix d'achat" [(ngModel)]="vehicle.price" (ngModelChange)="modelChanged($event)" type="number">
     </div>
     <br>
+    <small>Location par mois</small>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
-      <input class="form-control" placeholder="Location" [(ngModel)]="vehicle.renting" type="number" (ngModelChange)="modelChanged($event)">
+      <input class="form-control" placeholder="location" [(ngModel)]="vehicle.renting" type="number" (ngModelChange)="modelChanged($event)">
     </div>
     <br>
+    <small>Energie</small>
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">E</span>
       <select placeholder="Energie" class="form-control" [(ngModel)]="vehicle.energy" (ngModelChange)="modelChanged($event)">
         <option *ngFor="let e of energies" [value]="e">{{energiesEnum[e]}}</option>
       </select>
     </div>
     <br>
+    <small>Consommation /100km</small>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1" *ngIf="vehicle.energy != 0">L</span>
       <span class="input-group-addon" id="basic-addon1" *ngIf="vehicle.energy == 0">kWh</span>
-      <input class="form-control" placeholder="Consommation /100km" [(ngModel)]="vehicle.consumption" type="number" (ngModelChange)="modelChanged($event)">
+      <input class="form-control" placeholder="Consommation" [(ngModel)]="vehicle.consumption" type="number" (ngModelChange)="modelChanged($event)">
     </div>
     <br>
+    <small>Frais d'entretien (annuel)</small>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
-      <input class="form-control" placeholder="Frais d'entretien" [(ngModel)]="vehicle.maintenanceCost" type="number" (ngModelChange)="modelChanged($event)">
+      <input class="form-control" placeholder="entretien" [(ngModel)]="vehicle.maintenanceCost" type="number" (ngModelChange)="modelChanged($event)">
     </div>
     <br>
+    <small>Frais d'assurance (annuel)</small>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">€</span>
-      <input class="form-control" placeholder="Frais d'assurance" [(ngModel)]="vehicle.feesInsurance" type="number" (ngModelChange)="modelChanged($event)">
+      <input class="form-control" placeholder="assurance" [(ngModel)]="vehicle.feesInsurance" type="number" (ngModelChange)="modelChanged($event)">
     </div>
     <br>
   </div>

@@ -55,6 +55,7 @@ export class AppComponent {
     var index = this.vehicles.indexOf(vehicle, 0);
     this.vehicles.splice(index,1);
     this.saveVehicles();
+    this.generateCharts();
   }
 
   /**
@@ -84,22 +85,21 @@ export class AppComponent {
 
     // generate data
     let lineData = [];
-    let barLabels = [];
+    let barLabels = ['Coût par an'];
     let barChartData = [];
     this.vehicles.forEach(v => {
-      barLabels.push(v.name);
       let costs = this.calc.calculateCostsPerYear(v, this.userInfos);
-      let costPerYear = this.calc.calculateCostPerYear(v, this.userInfos);
+      let costPerYear = {data: [this.calc.calculateCostPerYear(v, this.userInfos)], label: v.name};
       
       barChartData.push(costPerYear);
       lineData.push({label: v.name, data: costs, fill: false});
     });
-
+    
     this.lineChart.data = lineData; 
-    this.barChart.data = [{ data : barChartData, label: "Coût par an"}];
+    this.barChart.data = barChartData;
     this.barChart.labels = barLabels;
   }
-  
+
   /**
    * Uncollapsed vehicles form.
    */

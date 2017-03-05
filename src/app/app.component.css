@@ -8,14 +8,41 @@ header{
 }
 
 .layout{
-    min-height: 100vh;
+    display: flex;
 }
 
-.vehicle-charts{
-    padding: 25px;
+.menu{
+    flex: 1;
     display: flex;
     flex-direction: column;
-    flex: 1;
+}
+
+.add-button {
+    margin:  0px;
+}
+
+.charts {
+    margin:15px;
+    flex: 3;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.chart {
+    flex: 0 0 auto;
+    width: 49%;
+    border: solid 1px #aaa;
+    padding: 15px
+}
+
+.empty-chart {
+    width: 45%;
+    border: solid 1px #aaa;
+    padding: 15px;
+    background-color: #aaa;
+    min-height: 50px;
 }
 
 .generate-btn{
@@ -24,26 +51,23 @@ header{
     display: flex;
 }
 
-app-user-infos{
-    padding: 20px 0px 0px 20px;
-}
-
-.add-vehicle {
-    display: flex;
-    flex-direction: column;
-}
-
-.chart{
-    border: solid 1px #aaa;
-    padding: 50px;
-    background-color: #fff;
-    display: block;
-    flex: 1;
-    margin:1%;
-}
-
 .vehicles {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+}
+
+.card{
+    border: 0;
+}
+
+.card-header {
+    background-color: lightskyblue;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header > a {
+    color: #000;
+    font-size: 130%;
 }

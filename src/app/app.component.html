@@ -1,77 +1,75 @@
-    <div class="row">
-        <div id="accordion" class="d-flex flex-column col-3" role="tablist" aria-multiselectable="true">
-            
-            <!-- Informations -->
-            <div class="card">
-                <div class="card-header" role="tab">
-                    <h5 class="mb-0">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse_ui" aria-expanded="true" [attr.aria-controls]="collapse_ui">
-                            Informations
-                        </a>
-                    </h5>
-                </div>
-                <app-user-infos id="collapse_ui" class="user-infos collapse" [userInfos]="userInfos"></app-user-infos>
+<div class="layout"> 
+    <div id="accordion" class="menu" role="tablist" aria-multiselectable="true">
+        
+        <!-- Informations -->
+        <div class="card">
+            <div class="card-header" role="tab">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_ui" aria-expanded="true" [attr.aria-controls]="collapse_ui">
+                    Informations
+                </a>
             </div>
-            
-            <!-- Vehicles -->
-            <div class="card" *ngFor="let v of vehicles; let i = index">
-                <div class="card-header" role="tab">
-                    <h5 class="mb-0 d-flex justify-content-between">
-                        <a data-toggle="collapse" data-parent="#accordion" [href]="'#collapse_'+i" aria-expanded="true" [attr.aria-controls]="'collapse_' + i">
-                        {{ v.name }}
-                        </a>            
-                        <button (click)="removeVehicle(v)" class="btn btn-danger">
-                            Suppr
-                        </button> 
-                    </h5>
-                </div>
-
-                <div [id]="'collapse_'+i" class="collapse" role="tabpanel">
-                    <app-vehicle 
-                        [vehicle]="v"
-                        [collapsed]="isCollapsed"
-                        [costPerMonth]="costsPerMonth[index]"
-                        (vehicleDeleted)="removeVehicle($event)"
-                        (onChange)="onVehicleChange($event)">
-                    </app-vehicle>
-                </div>
-            </div>
-
-            <!-- Actions (Add vehicle, compare) -->
-            <div class="d-flex" *ngIf="!vehicles || vehicles.length < 5">        
-                <div class="form-group" style="flex: 1">
-                    <small>Ajouter un vehicule</small>
-                    <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
-                </div>
-                <button 
-                    [disabled]="!vehicleName"
-                    class="btn btn-primary btn-lg" 
-                    (click)="addVehicle()">
-                    +
-                </button>
-            </div>
-            <button (click)="generateCharts()" class="btn btn-success " [disabled]="!vehicles || !vehicles.length">Comparer</button>
+            <app-user-infos id="collapse_ui" class="user-infos collapse" [userInfos]="userInfos"></app-user-infos>
         </div>
 
-        <!-- Charts -->
-        <div class="d-flex col-9" *ngIf="lineChart.data && barChart.data">
-            <div class="chart">
-                <canvas baseChart
-                    [datasets]="lineChart.data"
-                    [labels]="lineChart.labels"
-                    [legend]="lineChart.legend"
-                    [options]="lineChart.options"
-                    [chartType]="lineChart.type">
-                </canvas>
+        <!-- Actions (Add vehicle, compare) -->
+        <div class="d-flex justify-content-around align-items-center add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
+            <div class="form-group">
+                <small>Ajouter un vehicule</small>
+                <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
             </div>
-            <div class="chart">            
-                <canvas baseChart
-                    [datasets]="barChart.data"
-                    [labels]="barChart.labels"
-                    [options]="barChart.options"
-                    [legend]="barChart.legend"
-                    [chartType]="barChart.type">
-                </canvas>
+            <button 
+                [disabled]="!vehicleName"
+                class="btn btn-default btn-primary add-button" 
+                (click)="addVehicle()">
+                +
+            </button>
+            <button (click)="generateCharts()">Comparer</button>
+        </div>            
+        
+        <!-- Vehicles -->
+        <div class="card" *ngFor="let v of vehicles; let i = index">
+            <div class="card-header" role="tab">
+                <a data-toggle="collapse" data-parent="#accordion" [href]="'#collapse_'+i" aria-expanded="true" [attr.aria-controls]="'collapse_' + i">
+                {{ v.name }}
+                </a>            
+                <button (click)="removeVehicle(v)" class="btn btn-default btn-danger">
+                    X
+                </button> 
+            </div>
+
+            <div [id]="'collapse_'+i" class="collapse" role="tabpanel">
+                <app-vehicle 
+                    [vehicle]="v"
+                    [collapsed]="isCollapsed"
+                    [costPerMonth]="costsPerMonth[index]"
+                    (vehicleDeleted)="removeVehicle($event)"
+                    (onChange)="onVehicleChange($event)">
+                </app-vehicle>
             </div>
         </div>
     </div>
+
+    <!-- Charts -->
+    <div class="charts">
+        <div class="chart" *ngIf="lineChart.data && barChart.data">
+            <canvas 
+                baseChart
+                [datasets]="lineChart.data"
+                [labels]="lineChart.labels"
+                [legend]="lineChart.legend"
+                [options]="lineChart.options"
+                [chartType]="lineChart.type">
+            </canvas>
+        </div>
+        <div class="chart" *ngIf="lineChart.data && barChart.data">
+            <canvas 
+                baseChart
+                [datasets]="barChart.data"
+                [labels]="barChart.labels"
+                [options]="barChart.options"
+                [legend]="barChart.legend"
+                [chartType]="barChart.type">
+            </canvas>
+        </div>
+    </div>
+</div>
