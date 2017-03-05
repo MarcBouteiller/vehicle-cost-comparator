@@ -20,15 +20,16 @@ export class AppComponent {
   vehicleName: string;
   vehicles: Array<Vehicle>;
 
-  lineChart: ChartModel;
-  barChart: ChartModel;
-  radarChart: ChartModel;
+  lineChartPriceEvolution: ChartModel;
+  barChartCostPerYear: ChartModel;
+  barChartCostPerKm: ChartModel;
   isCollapsed= false;
   costsPerMonth: Array<number> = [];
 
   constructor(private calc : CostCalculatorService, private storage: LocalStorageService){
-    this.barChart = new ChartModel('bar', true, true);
-    this.lineChart = new ChartModel('line', true, true);
+    this.barChartCostPerYear = new ChartModel('bar', true, true);
+    this.barChartCostPerKm = new ChartModel('bar', true, true);
+    this.lineChartPriceEvolution = new ChartModel('line', true, true);
     let storedData = this.storage.restore();
     this.vehicles = [];
     if(storedData !== null){
@@ -80,21 +81,25 @@ export class AppComponent {
     for(let i = 0; i <= this.userInfos.nbYears; i++){
       lineChartLabels.push(i.toString());
     }
-    this.lineChart.labels = lineChartLabels;
+    this.lineChartPriceEvolution.labels = lineChartLabels;
 
     // generate data
-    let lineData = [];
-    let barLabels = ['Coût par an'];
-    let barChartData = [];
+    let lineData = [];  
+    let barChartDataYear = [];
+    let barChartDataKm = [];
     this.vehicles.forEach(v => {
-      this.generateBarChartCostPerYear(barChartData, v);
+      this.generateBarChartCostPerYear(barChartDataYear, v);
       this.generateLineChart(lineData, v);
+      this.generateBarChartCostPerKm(barChartDataKm, v, lineData);
     });
     
-    this.lineChart.data = lineData; 
-    this.barChart.data = barChartData;
-    this.barChart.labels = barLabels;
+    this.lineChartPriceEvolution.data = lineData; 
 
+    this.barChartCostPerYear.labels = ['Coût par an (€)'];
+    this.barChartCostPerYear.data = barChartDataYear;
+    
+    this.barChartCostPerKm.labels = ['Coût au km (€)'];
+    this.barChartCostPerKm.data = barChartDataKm;
   }
 
   generateLineChart(lineData:any[], v:Vehicle){
@@ -105,6 +110,12 @@ export class AppComponent {
   generateBarChartCostPerYear(barChartData: any[], v: Vehicle){
     let costPerYear = {data: [this.calc.calculateCostPerYear(v, this.userInfos)], label: v.name};
     barChartData.push(costPerYear);
+  }
+
+  generateBarChartCostPerKm(barChartData: any[], v: Vehicle, lineData: any[]){
+    let costs : any[] = lineData[lineData.length - 1].data;
+    let costPerKm = (costs[costs.length - 1] / (this.userInfos.km * this.userInfos.nbYears)).toPrecision(2);
+    barChartData.push({data: [costPerKm], label: v.name});
   }
 
   /**

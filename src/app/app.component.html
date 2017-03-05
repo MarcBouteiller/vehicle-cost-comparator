@@ -50,35 +50,35 @@
 
     <!-- Charts -->
     <div class="charts">
-        <div class="chart" *ngIf="lineChart.data">
+        <div class="chart" *ngIf="lineChartPriceEvolution.data">
             <canvas 
                 baseChart
-                [datasets]="lineChart.data"
-                [labels]="lineChart.labels"
-                [legend]="lineChart.legend"
-                [options]="lineChart.options"
-                [chartType]="lineChart.type">
+                [datasets]="lineChartPriceEvolution.data"
+                [labels]="lineChartPriceEvolution.labels"
+                [legend]="lineChartPriceEvolution.legend"
+                [options]="lineChartPriceEvolution.options"
+                [chartType]="lineChartPriceEvolution.type">
             </canvas>
         </div>
-        <div class="chart" *ngIf="barChart.data">
+        <div class="chart" *ngIf="barChartCostPerYear.data">
             <canvas 
                 baseChart
-                [datasets]="barChart.data"
-                [labels]="barChart.labels"
-                [options]="barChart.options"
-                [legend]="barChart.legend"
-                [chartType]="barChart.type">
+                [datasets]="barChartCostPerYear.data"
+                [labels]="barChartCostPerYear.labels"
+                [options]="barChartCostPerYear.options"
+                [legend]="barChartCostPerYear.legend"
+                [chartType]="barChartCostPerYear.type">
             </canvas>
         </div>
-        <!--<div class="chart" *ngIf="radarChart.data">
+        <div class="chart" *ngIf="barChartCostPerKm.data">
             <canvas 
                 baseChart
-                [datasets]="radarChart.data"
-                [labels]="radarChart.labels"
-                [options]="radarChart.options"
-                [legend]="radarChart.legend"
-                [chartType]="radarChart.type">
+                [datasets]="barChartCostPerKm.data"
+                [labels]="barChartCostPerKm.labels"
+                [options]="barChartCostPerKm.options"
+                [legend]="barChartCostPerKm.legend"
+                [chartType]="barChartCostPerKm.type">
             </canvas>
-        </div>-->
+        </div>
     </div>
 </div>
