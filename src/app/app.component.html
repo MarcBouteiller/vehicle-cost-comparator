@@ -5,16 +5,16 @@
         <div class="card">
             <div class="card-header" role="tab">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse_ui" aria-expanded="true" [attr.aria-controls]="collapse_ui">
-                    Informations
+                    Données communes
                 </a>
             </div>
             <app-user-infos id="collapse_ui" class="user-infos collapse" [userInfos]="userInfos"></app-user-infos>
         </div>
 
         <!-- Actions (Add vehicle, compare) -->
-        <div class="d-flex justify-content-around align-items-center add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
+        <div class="d-flex justify-content-between align-items-center add-vehicle" *ngIf="!vehicles || vehicles.length < 5">        
             <div class="form-group">
-                <input class="form-control" [(ngModel)]="vehicleName" placeholder="Nom du véhicule">
+                <input class="form-control" [(ngModel)]="vehicleName" placeholder="Ajouter un véhicule">
             </div>
             <button 
                 [disabled]="!vehicleName"
@@ -22,14 +22,13 @@
                 (click)="addVehicle()">
                 +
             </button>
-            <button (click)="generateCharts()">Comparer</button>
         </div>            
         
         <!-- Vehicles -->
         <div class="card" *ngFor="let v of vehicles; let i = index">
-            <div class="card-header" role="tab">
-                <a data-toggle="collapse" data-parent="#accordion" [href]="'#collapse_'+i" aria-expanded="true" [attr.aria-controls]="'collapse_' + i">
-                {{ v.name }}
+            <div class="card-header d-flex" role="tab">
+                <a style="flex: 1" data-toggle="collapse" data-parent="#accordion" [href]="'#collapse_'+i" aria-expanded="true" [attr.aria-controls]="'collapse_' + i">
+                   {{ v.name }}
                 </a>            
                 <button (click)="removeVehicle(v)" class="btn btn-default btn-danger">
                     X
@@ -49,7 +48,7 @@
     </div>
 
     <!-- Charts -->
-    <div class="charts">
+    <div class="charts" *ngIf="vehicles">
         <div class="chart" *ngIf="lineChartPriceEvolution.data">
             <canvas 
                 baseChart
@@ -68,6 +67,16 @@
                 [options]="barChartCostPerYear.options"
                 [legend]="barChartCostPerYear.legend"
                 [chartType]="barChartCostPerYear.type">
+            </canvas>
+        </div>
+        <div class="chart" *ngIf="barChartCostPerKm.data">
+            <canvas 
+                baseChart
+                [datasets]="barChartCostPerKm.data"
+                [labels]="barChartCostPerKm.labels"
+                [options]="barChartCostPerKm.options"
+                [legend]="barChartCostPerKm.legend"
+                [chartType]="barChartCostPerKm.type">
             </canvas>
         </div>
         <div class="chart" *ngIf="barChartCostPerKm.data">

@@ -9,7 +9,7 @@ export class CostCalculatorService {
   constructor() { }
 
   calculateConsumption (v: Vehicle, userInfos: UserInfos){
-    return userInfos.km / 100 * v.consumption * this.getEnergysPrice(v.energy, userInfos);
+    return userInfos.km / 100 * v.consumption * this.getEnergyPrice(v.energy, userInfos);
   }
 
   /**
@@ -63,7 +63,7 @@ export class CostCalculatorService {
     return costs;
   }
 
-  private getEnergysPrice(e: any, userInfos: UserInfos) {
+  private getEnergyPrice(e: any, userInfos: UserInfos) {
     switch (e) {
       case Energy.Diesel:
         return userInfos.gasoil;
@@ -74,7 +74,7 @@ export class CostCalculatorService {
       case Energy.SP98:
         return userInfos.sp98;
       default:
-        return this.getEnergysPrice(parseInt(e), userInfos);
+        return this.getEnergyPrice(parseInt(e), userInfos);
     }
   }
 

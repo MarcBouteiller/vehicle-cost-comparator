@@ -8,6 +8,7 @@ export class UserInfos {
     nbYears: number;
 
     constructor(){
+        // default values
         this.nbYears = 8;
         this.km = 15000;
         this.electricity = 0.15;

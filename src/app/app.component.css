@@ -62,7 +62,7 @@ header{
 }
 
 .card-header {
-    background-color: lightskyblue;
+    background-color: white;
     display: flex;
     justify-content: space-between;
 }
