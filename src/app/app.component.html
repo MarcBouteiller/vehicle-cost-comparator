@@ -20,7 +20,7 @@
                 [disabled]="!vehicleName"
                 class="btn btn-default btn-primary" 
                 (click)="addVehicle()">
-                +
+                <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
         </div>            
         
@@ -31,10 +31,9 @@
                    {{ v.name }}
                 </a>            
                 <button (click)="removeVehicle(v)" class="btn btn-default btn-danger">
-                    X
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button> 
             </div>
-
             <div [id]="'collapse_'+i" class="collapse" role="tabpanel">
                 <app-vehicle 
                     [vehicle]="v"
